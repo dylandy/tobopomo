@@ -1,15 +1,18 @@
 require "tobopomo/version"
-require "json"
+require "tobopomo/data"
 
 module Tobopomo
-  tsi = JSON.load(open("data/tsi.json"))
-
-  def self.normalise()
+  def self.normalise(input)
+    puts input
   end
   def self.char_seperater()
   end
-  def self.tobopomo()
+  def tobopomo(input)
+    Tobopomo::normalise(input)
+    puts $tsi["ㄨㄛˇ"]
   end
-  def self.tokanji()
+  def tokanji(input)
+    Tobopomo::normalise(input)
   end
 end
+include Tobopomo
