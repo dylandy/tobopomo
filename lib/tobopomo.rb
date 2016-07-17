@@ -1,15 +1,19 @@
 require "tobopomo/version"
-require "json"
+require "tobopomo/data"
+require "tobopomo/keymap"
 
 module Tobopomo
-  tsi = JSON.load(open("data/tsi.json"))
-
-  def self.normalise()
+  def normalise(string)
+    string.gsub(/\s+/, "")
   end
-  def self.char_seperater()
+  def tobopomo(input)
+    total = 0
+    input = input.chars.map{|x| $layout[:"#{x.ord.to_s}"]}.join("")
+    string = input.split(/[" "|"ˇ"|"ˋ"|"ˊ"|"˙"]/)
+    string = string.map.with_index{|x , index| total = total + x.length;x+input[total + index]}
+    return string.map{|x| normalise(x)}
   end
-  def self.tobopomo()
-  end
-  def self.tokanji()
+  def tokanji(input)
   end
 end
+include Tobopomo
