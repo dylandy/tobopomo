@@ -49,10 +49,35 @@ describe Tobopomo do
     it 'some null hide in long sentence as well' do
       expect(tobopomo(case_ten)).to eq([ 'ㄓㄤˇ', 'ㄉㄜˊ', 'ㄍㄣ', 'ㄉㄚˋ', 'ㄕㄨˋ', 'ㄧ', 'ㄧㄤˋ','ㄍㄠ' ])
     end
+
+    it 'string method should perform equally as fuction call' do
+      expect("u su06".to_bopomo).to eq(['ㄧ', 'ㄋㄧㄢˊ'])
+    end
   end
 
   describe "#tokanji" do
-    it 'case one' do
+    case_one = ['ㄧ', 'ㄋㄧㄢˊ']
+    case_two = ['ㄧ']
+    case_three = 'ㄧ'
+    it 'a founded keyword' do
+      expect(tokanji(case_one)).to eq([[ '一年']])
+    end
+    it 'a single character should return five characters by default' do
+      expect(tokanji(case_two)).to eq([[  '一', '醫', '依', '衣', '伊' ]])
+    end
+
+    it 'a string input would return a proper character output array' do
+      expect(tokanji(case_three)).to eq([  '一', '醫', '依', '衣', '伊' ])
+    end
+
+    it 'should limit length of return' do
+      expect(tokanji(case_three , 10).length).to eq(10)
+      expect(tokanji(case_three , 1).length).to eq(1)
+    end
+
+    it 'should be actted properly using array function' do
+      expect(tobopomo("u su06").to_kanji).to eq([[ '一年']])
+      expect(tobopomo("u ").to_kanji(10).first.count).to eq(10)
     end
   end
 end
