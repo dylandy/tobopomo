@@ -17,3 +17,8 @@ module Tobopomo
   end
 end
 include Tobopomo
+class String
+  def to_bopomo
+    tobopomo(self)
+  end
+end

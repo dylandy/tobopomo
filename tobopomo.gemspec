@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Tobopomo::VERSION
   spec.authors       = ["dylandy.chang"]
   spec.email         = ["dylandy.chang@gmail.com"]
+  spec.licenses      = ["LGPL-3.0"]
 
   spec.summary       = %q{An api for convert latin alphabet straight to bopomo script and Chinese characters.}
   spec.description   = %q{An input method api for converting latin alphabet into human readable bopomo script and Chinese characters.}
