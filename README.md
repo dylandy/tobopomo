@@ -1,8 +1,5 @@
 # Tobopomo
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tobopomo`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+An zuyin input method api for transforming latin alphabet input into Bopomo script and Chinese characters.
 
 ## Installation
 
@@ -22,15 +19,42 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+In your script, require the tobopomo module.
 
-## Development
+```
+require "tobopomo"
+```
+After requiring, you can either use fuctions that provides from the module or using it directly from String and Array.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
+tobopomo("su3cl3a8 ") // [ 'ㄋㄧˇ', 'ㄏㄠˇ', 'ㄇㄚ' ]
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+tokanji("ㄋ一ˇㄏㄠˇㄇㄚ ") // [ [ '你好嗎', '妳好嗎' ] ]
+
+tokanji("ㄍㄨˇ") // [ [ '股', '古', '谷', '鼓', '骨' ] ]  #default output 5 of characters
+
+tokanji("ㄍㄨˇ" , 3) // [ [ '股', '古', '谷' ] ] #if you want to change the output number just simply pass the number as second parameter.
+```
+
+```
+"su3cl3a8 ".to_bopomo // [ 'ㄋㄧˇ', 'ㄏㄠˇ', 'ㄇㄚ' ]
+
+"ㄋ一ˇㄏㄠˇㄇㄚ".to_kanji // [ [ '你好嗎', '妳好嗎' ] ]
+
+"ㄍㄨˇ".to_kanji // [ [ '股', '古', '谷', '鼓', '骨' ] ]
+
+"ㄍㄨˇ".to_kanji(3) // [ [ '股', '古', '谷'] ]  #pass the limit number as parameter into tokanji method in string mode.
+```
+
+##Credit
+
+Thanks for chewing team and libchewing's help. Without them this project wouldn't be successed.
+
+## License
+
+The project is licensed under LGPL-3.0 License. For further information, please checkout the License file or the [GNU website](https://www.gnu.org/licenses/lgpl-3.0.en.html)
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/tobopomo.
+Bug reports and pull requests are welcome on GitHub at https://github.com/dylandy/tobopomo.
 

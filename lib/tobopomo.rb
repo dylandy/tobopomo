@@ -8,7 +8,7 @@ module Tobopomo
   end
   def tobopomo(input)
     total = 0
-    input = input.chars.map{|x| $layout[:"#{x.ord.to_s}"]}.join("")
+    input = input.chars.map{|x| Tobopomo::LAYOUT[:"#{x.ord.to_s}"]}.join("")
     string = input.split(/[" "|"ˇ"|"ˋ"|"ˊ"|"˙"]/)
     string = string.map.with_index{|x , index| total = total + x.length;x+input[total + index]}
     return string.map{|x| normalise(x)}
@@ -20,24 +20,24 @@ module Tobopomo
       last = 0
       input.each_with_index do | x , index|
         string = input[last..index].join("")
-        if $tsi[string] && index < (input.length - 1)
+        if Tobopomo::TSI[string] && index < (input.length - 1)
           next 
-        elsif $tsi[string] && index == (input.length - 1)
-          output << $tsi[string][0...limit]
-        elsif $tsi[string].nil? &&index == (input.length - 1)
+        elsif Tobopomo::TSI[string] && index == (input.length - 1)
+          output << Tobopomo::TSI[string][0...limit]
+        elsif Tobopomo::TSI[string].nil? &&index == (input.length - 1)
           string = input[last...index].join("")
-          output << $tsi[string][0...limit]
-          output << $tsi[input[index]][0...limit]
+          output << Tobopomo::TSI[string][0...limit]
+          output << Tobopomo::TSI[input[index]][0...limit]
         else
           string = input[last...index].join("")
-          output << $tsi[string][0...limit]
+          output << Tobopomo::TSI[string][0...limit]
           last = index
         end
       end
       return output
     elsif input.is_a? String
       normalise(input)
-      return $tsi[input][0...limit]
+      return Tobopomo::TSI[input][0...limit]
     end
   end
 end
