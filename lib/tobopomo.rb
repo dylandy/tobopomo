@@ -7,10 +7,9 @@ module Tobopomo
     string.gsub(/\s+/, "")
   end
   def tobopomo(input)
-    total = 0
     input = input.chars.map{|x| Tobopomo::LAYOUT[:"#{x.ord.to_s}"]}.join("")
     string = input.split(/[" "|"ˇ"|"ˋ"|"ˊ"|"˙"]/)
-    string = string.map.with_index{|x , index| total = total + x.length;x+input[total + index]}
+    string = string.map.with_index { |x , index| x + input[string[0..index].inject(0){|sum , i| sum+i.length} + index] } # x + input[ sum_array_length_until_current_index + index]
     return string.map{|x| normalise(x)}
   end
   def tokanji(input, limit=5)
